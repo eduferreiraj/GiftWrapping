@@ -1,15 +1,12 @@
 #!/usr/bin/python3
 #Arquitetura Sistemas Distribuí­dos
-#eduardo f guilherme a ernesto
 
 import pika
 import time
 from sys import argv
-from shouter import ShouterPlus
 from random import randint
-from flooding_coordenates import FloodingCoordenates
+from distributed import ShouterPlus, FloodingCoordenates
 
-shouter_access = None
 class GiftWrapping:
     def __init__(self, my_id, neighbors, channel, n_neighbors):
         self.connection = pika.BlockingConnection()

@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 #Arquitetura Sistemas Distribuí­dos
-#eduardo f guilherme a ernesto
 
 import pika
 import time
