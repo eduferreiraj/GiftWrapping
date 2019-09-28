@@ -1,5 +1,5 @@
 from .flooding_coordenates import FloodingCoordenates
 from .shouter_plus import ShouterPlus
-from .convex_hull import ConvexHull
+from .gift_wrapping import GiftWrapping
 
 __all__ = ['FloodingCoordenates', 'ShouterPlus', 'ConvexHull']
