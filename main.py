@@ -7,7 +7,7 @@ from sys import argv
 from random import randint
 from distributed import ShouterPlus, FloodingCoordenates
 
-class GiftWrapping:
+class GiftWrapping(BaseAlgorithm):
     def __init__(self, my_id, neighbors, channel, n_neighbors):
         self.connection = pika.BlockingConnection()
         self.channel = connection.channel()

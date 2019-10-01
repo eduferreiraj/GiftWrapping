@@ -4,7 +4,7 @@
 import pika
 import time
 from sys import argv
-from base import BaseAlgorithm
+from .base import BaseAlgorithm
 
 class FloodingCoordenates(BaseAlgorithm):
     def initialize(self, my_id, neighbors, channel, n_neighbors):

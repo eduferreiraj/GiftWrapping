@@ -4,8 +4,8 @@
 import pika
 import time
 from sys import argv
-from base import BaseAlgorithm
-from flooding_coordenates import FloodingCoordenates
+from .base import BaseAlgorithm
+from .flooding_coordenates import FloodingCoordenates
 
 class ShouterPlus(BaseAlgorithm):
     def initialize(self, my_id, neighbors, channel):
@@ -29,23 +29,23 @@ class ShouterPlus(BaseAlgorithm):
 
         if self.state == 'STARTER':
             for n in self.neighbors:
-    		    self.send_message(n, 'Q')
-    	    self.state = 'ACTIVE'
+                self.send_message(n, 'Q')
+            self.state = 'ACTIVE'
 
         elif self.state == 'IDLE':
-    	    self.tree_nodes.append(source)
+            self.tree_nodes.append(source)
             self.dad = source
-    	    self.send_message(source, 'SIM')
-    	    self.message_counter += 1
+            self.send_message(source, 'SIM')
+            self.message_counter += 1
             for n in self.neighbors:
-	            if not n == source:
-	                self.send_message(n, 'Q')
-    	    self.state = 'ACTIVE'
+                if not n == source:
+                    self.send_message(n, 'Q')
+            self.state = 'ACTIVE'
 
         elif self.state == 'ACTIVE':
             self.message_counter += 1
-    	    if message == 'SIM':
-    		    self.tree_nodes.append(source)
+            if message == 'SIM':
+                self.tree_nodes.append(source)
 
         if self.message_counter == len(vizinhos):
             self.state = 'OK'

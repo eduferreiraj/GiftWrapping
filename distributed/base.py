@@ -16,8 +16,8 @@ class BaseAlgorithm:
         # Input: message (str)
         # Output: boolean
         status = False
-        for message_format in self.message_formats
-            if message_format in message
+        for message_format in self.message_formats:
+            if message_format in message:
                 status = True
         return status
 
