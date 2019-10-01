@@ -5,9 +5,13 @@ import pika
 import time
 from sys import argv
 from random import randint
-from distributed import ShouterPlus, FloodingCoordenates
+from distributed import ShouterPlus, FloodingCoordenates, GiftWrapping
 
+<<<<<<< HEAD
 class GiftWrapping(BaseAlgorithm):
+=======
+class ConvexHull:
+>>>>>>> 83b32ab25f99900df5562e6e4fe3bd651fb5c4bf
     def __init__(self, my_id, neighbors, channel, n_neighbors):
         self.connection = pika.BlockingConnection()
         self.channel = connection.channel()
