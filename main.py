@@ -1,23 +1,24 @@
 #!/usr/bin/python3
-#Arquitetura Sistemas Distribuí­dos
 
 import pika
 import time
 from sys import argv
 from random import randint
-from distributed import ShouterPlus, FloodingCoordenates, GiftWrapping
+from distributed import ShouterPlus, FloodingCoordenates
 
-class GiftWrapping(BaseAlgorithm):
-    def __init__(self, my_id, neighbors, channel, n_neighbors):
+class ConvexHull(object):
+    def __init__(self, my_id, n_neighbors, neighbors):
         self.connection = pika.BlockingConnection()
-        self.channel = connection.channel()
+        self.channel = self.connection.channel()
         self.channel.queue_declare(queue=my_id, auto_delete=True)
+        self.neighbors = neighbors
+        self.my_id = my_id
         for n in self.neighbors:
             self.channel.queue_declare(queue=n, auto_delete=True)
-        self.shouter = ShouterPlus(self.my_id, self.neighbors, self.channel)
-        self.channel.basic_consume(queue=meu_id, on_message_callback=self._callback, auto_ack=True)
+        self.shouter = ShouterPlus(self, self.my_id, self.neighbors, self.channel)
+        self.algorithms = [self.shouter]
+        self.channel.basic_consume(queue=self.my_id, on_message_callback=self._callback, auto_ack=True)
         self.n_neighbors = n_neighbors
-        self.algorithms = []
         self.coordenate = (randint(0,100), randint(0,100))
         self.messages = []
 
@@ -30,7 +31,8 @@ class GiftWrapping(BaseAlgorithm):
             self.connection.close()
 
     def _callback(self, channel, method, prop, body):
-        if not message_handler(body.decode()):
+        print("Nova mensagem recebida: {}".format(body.decode()))
+        if not self.message_handler(body.decode()):
             self.messages.append(body.decode())
 
     def message_handler(self, message):
@@ -54,12 +56,14 @@ class GiftWrapping(BaseAlgorithm):
 
 
 if __name__ == "__main__":
-    if(len(argv) < 2):
-        print('USO: {} <MEU_ID> <VIZINHOS>'.format(argv[0]))
+    if(len(argv) < 3):
+        print('USO: {} <MEU_ID> <N_VIZINHOS> <VIZINHOS>'.format(argv[0]))
         exit(1)
 
     my_id = argv[1]
-    neighbors = argv[2:]
+    n_neighbors = argv[2]
+    neighbors = argv[3:]
 
-    gw = GiftWrapping(my_id, neighbors)
-    gw.start()
+    ch = ConvexHull(my_id, n_neighbors, neighbors)
+    ch.start()
+

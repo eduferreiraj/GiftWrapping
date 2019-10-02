@@ -8,8 +8,9 @@ from .base import BaseAlgorithm
 from .flooding_coordenates import FloodingCoordenates
 
 class ShouterPlus(BaseAlgorithm):
-    def initialize(self, my_id, neighbors, channel):
-        self.message_format = ["SIM", "Q"]
+    def __init__(self, main_algorithm, my_id, neighbors, channel):
+        self.main_algorithm = main_algorithm
+        self.message_formats = ["SIM", "Q"]
         self.my_id = my_id
         self.neighbors = neighbors
         self.state = 'IDLE'
@@ -25,21 +26,20 @@ class ShouterPlus(BaseAlgorithm):
             source = ''
         else:
             source, message = message.split(":")
-            print("{} recebi {} de {}".format(self.my_id, message, source))
 
         if self.state == 'STARTER':
             for n in self.neighbors:
-                self.send_message(n, 'Q')
+                self.send(n, 'Q')
             self.state = 'ACTIVE'
 
         elif self.state == 'IDLE':
             self.tree_nodes.append(source)
             self.dad = source
-            self.send_message(source, 'SIM')
+            self.send(source, 'SIM')
             self.message_counter += 1
             for n in self.neighbors:
                 if not n == source:
-                    self.send_message(n, 'Q')
+                    self.send(n, 'Q')
             self.state = 'ACTIVE'
 
         elif self.state == 'ACTIVE':
@@ -47,7 +47,7 @@ class ShouterPlus(BaseAlgorithm):
             if message == 'SIM':
                 self.tree_nodes.append(source)
 
-        if self.message_counter == len(vizinhos):
+        if self.message_counter == len(self.neighbors):
             self.state = 'OK'
             self.finish()
 

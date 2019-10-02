@@ -1,16 +1,4 @@
 class BaseAlgorithm:
-    def __init__(self, main_algorithm, *args):
-        self.main_algorithm = main_algorithm
-        self.message_formats = []
-        self.initialize(*args)
-
-    def initialize(self, *args):
-        # Initialize the model with the parameters needed to work.
-        # Args will be handled by the algorithm.
-        # Input: args (tuple)
-        # Output: None
-        return
-
     def validate_message(self, message):
         # Validate the message with the self.message_formats list
         # Input: message (str)
@@ -42,8 +30,3 @@ class BaseAlgorithm:
         # Input: dest (str), message (str)
         print("Sending {} to {}".format(message, dest))
         self.channel.basic_publish(exchange='', routing_key=dest, body="{}:{}".format(self.my_id, message))
-
-
-    def finish(self):
-        # End the algorithm by removing his instance of the main algorithm.
-        self.main_algorithm.algorithms.remove(self)
