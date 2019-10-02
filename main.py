@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# Envoltório Convexo
+# Nome: Eduardo Borsa, Eduardo Ferreira e Tiago Paiva
 
 import pika
 import time

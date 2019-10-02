@@ -1,3 +1,7 @@
+# Envoltório Convexo
+# Nome: Eduardo Borsa, Eduardo Ferreira e Tiago Paiva
+
+
 class BaseAlgorithm:
     def validate_message(self, message):
         # Validate the message with the self.message_formats list

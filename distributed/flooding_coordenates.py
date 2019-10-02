@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 #Arquitetura Sistemas Distribuí­dos
+# Envoltório Convexo
+# Nome: Eduardo Borsa, Eduardo Ferreira e Tiago Paiva
+
 
 import pika
 import time
